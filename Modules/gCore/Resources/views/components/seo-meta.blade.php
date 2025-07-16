@@ -1,0 +1,3 @@
+<div>
+    {!! $seoService->renderMetaTags() !!}
+</div>

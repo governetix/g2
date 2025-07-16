@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Modules\GCore\Providers\GCoreServiceProvider;
 use Modules\GBackup\Providers\GBackupServiceProvider;
+use Modules\GMonitorix\Providers\GMonitorixServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->register(GCoreServiceProvider::class);
         $this->app->register(GBackupServiceProvider::class);
+        $this->app->register(GMonitorixServiceProvider::class);
     }
 
     /**

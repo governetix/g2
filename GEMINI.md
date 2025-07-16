@@ -192,21 +192,21 @@ Esta fase dota al módulo `gCore` de herramientas y patrones reutilizables para 
 13. **Definir Helpers y Traits Globales**
     * **Helpers:** Crear un directorio `Modules/gCore/Helpers` y añadir archivos PHP con funciones globales que no encajen en una clase específica (ej. `app_name()`, `format_currency()`). Asegurar su carga en el `gCoreServiceProvider` (ej. `require_once __DIR__ . '/../Helpers/app.php';`).
     * **Traits:** Crear un directorio `Modules/gCore/Traits` para traits reutilizables (ej. `HasUuid`, `Auditable`, `Translatable`).
-    * [ ]
+    * [✓]
 
 14. **Definir Interfaces y Clases Abstractas Comunes**
     * **Interfaces (`Contracts/` o `Interfaces/`):** Definir interfaces para servicios o repositorios que serán implementados por otros módulos (ej. `UserRepositoryInterface`, `SettingsRepositoryInterface`). Esto promueve la inyección de dependencias y la testabilidad. Ubicarlas en `Modules/gCore/Contracts`.
     * **Clases Abstractas (`Abstracts/`):** Crear clases base para modelos, controladores o servicios que proporcionen funcionalidad común (ej. `Modules/gCore/Abstracts/BaseModel.php`, `BaseController.php`).
-    * [ ]
+    * [✓]
 
 15. **Implementar Manejo de Excepciones Personalizadas**
     * Definir clases de excepción personalizadas para errores comunes y globales de la aplicación (ej. `Modules/gCore/Exceptions/ResourceNotFoundException.php`, `ValidationException`).
     * Extender el `Handler` de Laravel o añadir lógica en el `gCoreServiceProvider` para renderizar estas excepciones de forma consistente.
-    * [ ]
+    * [✓]
 
 16. **Definir Enums Globales**
     * Crear un directorio `Modules/gCore/Enums` para definir enumeraciones que representen estados, tipos o categorías comunes en toda la aplicación (ej. `UserStatusEnum`, `PaymentStatusEnum`). Utilizar PHP 8.1+ Enums.
-    * [ ]
+    * [✓]
 
 ### **Fase 2.5: Observabilidad y Monitoreo**
 
@@ -215,20 +215,20 @@ Esta fase introduce el módulo `gMonitorix` para centralizar el monitoreo de la 
 17. **Crear el Módulo `gMonitorix`**
     * Generar el módulo: `php artisan module:make gMonitorix`.
     * **Propósito:** Centralizar la gestión y visualización de logs, errores y el estado de los módulos de la aplicación.
-    * [ ]
+    * [✓]
 
 18. **Integrar Logs y Errores en `gMonitorix`**
     * **Configuración de Logs:** Configurar los canales de logging de Laravel para que los logs importantes puedan ser accedidos por `gMonitorix`.
     * **Modelo `LogEntry` / `ErrorEntry`:** Crear modelos y migraciones en `gMonitorix` para almacenar logs y errores críticos en la base de datos, permitiendo su consulta desde la interfaz.
     * **Listener/Subscriber:** Implementar listeners o suscriptores en `gMonitorix` para capturar eventos de logging o excepciones de Laravel y persistirlos en la base de datos.
-    * [ ]
+    * [✓]
 
 19. **Diseñar Interfaz de Monitoreo en `gMonitorix`**
     * **Rutas, Controladores y Vistas:** Crear una sección de administración en `gMonitorix` para visualizar:
         * **Visor de Logs:** Una interfaz para ver y filtrar los logs almacenados en la base de datos o leer directamente de los archivos de log.
         * **Reporte de Errores:** Una lista de los errores capturados, con detalles como `stack trace`, usuario, URL, etc.
         * **Estado de Módulos:** Una tabla que muestre los módulos instalados (usando la API de `nwidart/laravel-modules`), su versión, si están habilitados, etc.
-    * [ ]
+    * [✓]
 
 ### **Fase 3: Internacionalización (i18n) y SEO**
 
@@ -242,19 +242,19 @@ Integrar la capacidad de i18n y optimización para motores de búsqueda desde el
         $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'gcore');
         ```
     * **Middleware de Idioma:** Crear un `SetLocaleMiddleware` en `Modules/gCore/Http/Middleware/SetLocaleMiddleware.php` para establecer el idioma de la aplicación basado en la sesión, preferencias del usuario o URL. Registrarlo en el `gCoreServiceProvider` y en `app/Http/Kernel.php`.
-    * [ ]
+    * [✓]
 
 21. **Gestionar Traducciones desde la Interfaz (Dog-feeding)**
     * **Modelo y Migración:** Crear un modelo `Translation` (`Modules/gCore/Models/Translation.php`) y su migración para almacenar traducciones dinámicamente en la base de datos.
     * **Repositorio/Servicio:** Implementar un `TranslationRepository` (o servicio) que use este modelo y que pueda ser inyectado para gestionar las traducciones.
     * **Interfaz de Gestión:** Crear rutas, controladores y vistas dentro del módulo `gCore` para un CRUD (Crear, Leer, Actualizar, Borrar) de traducciones. Esto permitirá a los administradores añadir o modificar traducciones sin tocar código.
-    * [ ]
+    * [✓]
 
 22. **Implementar Helpers para SEO (Meta Tags, Sitemaps, etc.)**
     * **Servicio SEO:** Crear un `SeoService` en `Modules/gCore/Services/SeoService.php` que proporcione métodos para establecer dinámicamente meta tags (título, descripción, palabras clave, Open Graph), `canonical URLs`, etc.
     * **Blade Directive/Component:** Crear una directiva Blade (ej. `@seo('title', 'Mi Título')`) o un componente Blade (`<x-gcore::seo-meta title="Mi Título" />`) en el módulo `gCore` que use el `SeoService` para renderizar las meta tags en los layouts.
     * **Generación de Sitemap:** Implementar un comando Artisan en el `gCore` para generar un sitemap dinámicamente, o integrar una librería de terceros para ello.
-    * [ ]
+    * [✓]
 
 ### **Fase 4: Gestión del Módulo Base desde la Interfaz (Dog-feeding)**
 

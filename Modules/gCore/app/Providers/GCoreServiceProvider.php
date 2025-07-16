@@ -4,8 +4,8 @@ namespace Modules\GCore\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
+use Modules\GCore\Services\SeoService;
+use Modules\GCore\Console\Commands\GenerateSitemapCommand;
 
 class GCoreServiceProvider extends ServiceProvider
 {
@@ -27,9 +27,13 @@ class GCoreServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(base_path('Modules/' . $this->name . '/database/migrations'));
         $this->loadRoutesFrom(base_path('Modules/' . $this->name . '/Routes/web.php'));
 
+        $this->app['router']->aliasMiddleware('setlocale', \Modules\GCore\Http\Middleware\SetLocaleMiddleware::class);
+
         $this->publishes([
             __DIR__.'/../Resources/assets' => public_path('modules/gcore'),
         ], 'gcore-assets');
+
+        Blade::component('x-gcore::seo-meta', \Modules\GCore\View\Components\SeoMeta::class);
     }
 
     /**
@@ -37,8 +41,13 @@ class GCoreServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        require_once __DIR__ . '/../Helpers/app.php';
         // $this->app->register(EventServiceProvider::class);
         // $this->app->register(RouteServiceProvider::class);
+
+        $this->app->singleton(SeoService::class, function ($app) {
+            return new SeoService();
+        });
     }
 
     /**
@@ -46,7 +55,9 @@ class GCoreServiceProvider extends ServiceProvider
      */
     protected function registerCommands(): void
     {
-        // $this->commands([]);
+        $this->commands([
+            GenerateSitemapCommand::class,
+        ]);
     }
 
     /**
@@ -84,7 +95,7 @@ class GCoreServiceProvider extends ServiceProvider
         $configPath = base_path('Modules/' . $this->name . '/Config');
 
         if (is_dir($configPath)) {
-            $iterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($configPath));
+            $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($configPath));
 
             foreach ($iterator as $file) {
                 if ($file->isFile() && $file->getExtension() === 'php') {

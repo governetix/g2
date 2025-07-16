@@ -127,6 +127,12 @@ return [
             'path' => storage_path('logs/laravel.log'),
         ],
 
+        'database' => [
+            'driver' => 'custom',
+            'via' => Modules\GMonitorix\app\Logging\DatabaseLogger::class,
+            'level' => env('LOG_LEVEL', 'debug'),
+        ],
+
     ],
 
 ];

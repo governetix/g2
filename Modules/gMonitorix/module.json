@@ -1,0 +1,11 @@
+{
+    "name": "GMonitorix",
+    "alias": "gmonitorix",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GMonitorix\\app\\Providers\\GMonitorixServiceProvider"
+    ],
+    "files": []
+}
