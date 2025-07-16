@@ -16,7 +16,7 @@ Este roadmap guiará la construcción de un módulo `Core` exhaustivo y auto-ges
 
 Para mantener la consistencia y facilitar el mantenimiento, se adoptarán las siguientes convenciones:
 
-* **Nombres de Módulos:** Prefijo `g` (minúscula) seguido del nombre en `PascalCase` (ej. `gCore`, `gBackup`, `gMonitorix`).
+* **Nombres de Módulos:** Para la presentación pública y comercial, se utilizarán nombres descriptivos (ej. `Core`, `Vault`, `Watch`, `Access`). Internamente, las carpetas de los módulos seguirán el formato `gPascalCase` (ej. `gCore`, `gBackup`, `gMonitorix`, `gAccess`), o sea pefijo `g` (minúscula) seguido del nombre en `PascalCase` (ej. `gCore`, `gBackup`, `gMonitorix`).
 
 * **Nombres de Archivos de Configuración:** `kebab-case` (ej. `config.php`, `backup.php`).
 
@@ -55,7 +55,7 @@ Esta fase establece las bases para el seguimiento de cambios y errores desde el 
         * Descripción exacta del error (tal como se observa o lo reporta el sistema).
         * `Conjunto de Cambios y Pruebas Realizados:` (aquí se listarán las acciones tomadas).
         * `Resultado: [  ]` (marcador para indicar éxito o fracaso, a ser actualizado por el usuario).
-    * [ ]
+    * [✓]
 
 2.  **Crear Archivo `Changes.md`**
     * Crear un archivo `Changes.md` en la raíz del proyecto.
@@ -67,14 +67,14 @@ Esta fase establece las bases para el seguimiento de cambios y errores desde el 
         * `Módulos Afectados` (ej. `gCore`, `gIAM`)
         * `Archivos Modificados` (referencia a los archivos principales, útil para el backup)
         * `Notas` Adicionales
-    * [ ]
+    * [✓]
 
 3.  **Configurar Control de Versiones (Git)**
     * Inicializar el repositorio Git localmente.
     * Conectar el repositorio local con el remoto en GitHub: `https://github.com/governetix/g2`.
     * Asegurar la configuración de un archivo `.gitignore` adecuado para excluir directorios como `vendor/`, `node_modules/`, `storage/`, y el archivo `.env`.
     * **Excluir Archivos de Documentación:** Añadir `Errors.md` y `Changes.md` al archivo `.gitignore` para excluirlos del control de versiones, ya que son documentos de seguimiento locales.
-    * [ ]
+    * [✓]
 
 ### **Fase 1: Configuración y Fundamentos del Módulo Base**
 
@@ -84,11 +84,11 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
     * Asegurar una instalación limpia de Laravel 12.x con PHP 8.3+.
     * Instalar el paquete `nwidart/laravel-modules`: `composer require nwidart/laravel-modules`.
     * Publicar la configuración del paquete: `php artisan vendor:publish --provider="Nwidart\Modules\LaravelModulesServiceProvider"`.
-    * [ ]
+    * [✓]
 
 5.  **Crear el Módulo `gCore`**
     * Generar el módulo usando Artisan: `php artisan module:make gCore`. Esto establecerá la estructura de carpetas básica en `Modules/gCore`.
-    * [ ]
+    * [✓]
 
 6.  **Configurar Inicialmente el Módulo `gCore`**
     * **`module.json`:** Revisar y ajustar la información del módulo (nombre, descripción, etc.).
@@ -101,7 +101,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
             // Otras configuraciones iniciales del Core
         ];
         ```
-    * [ ]
+    * [✓]
 
 7.  **Configurar Service Provider Básico (`gCoreServiceProvider.php`)**
     * Este será el corazón del módulo. Asegurar que registra el archivo de configuración:
@@ -109,7 +109,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
         // En el método register()
         $this->mergeConfigFrom(__DIR__ . '/../Config/config.php', 'gcore');
         ```
-    * [ ]
+    * [✓]
 
 8.  **Registrar Vistas y Rutas Básicas del Core**
     * **Vistas:** En el método `boot()` del `gCoreServiceProvider`, registrar las vistas para que puedan ser accedidas desde otros módulos.
@@ -126,7 +126,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
             })->name('welcome');
         });
         ```
-    * [ ]
+    * [✓]
 
 9.  **Integrar Assets (CSS/JS Base)**
     * **Estructura:** Crear los directorios y archivos `Modules/gCore/Resources/assets/css/app.css` y `Modules/gCore/Resources/assets/js/app.js`.
@@ -142,7 +142,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
         <link href="{{ asset('modules/gcore/css/app.css') }}" rel="stylesheet">
         <script src="{{ asset('modules/gcore/js/app.js') }}"></script>
         ```
-    * [ ]
+    * [✓]
 
 10. **Integrar Font Awesome y Google Fonts**
     * **Font Awesome:** Añadir el enlace CDN de Font Awesome en la sección `<head>` de tu layout principal (o en un archivo Blade que incluya el `head`).
@@ -163,7 +163,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
             ```html
             <link href="[https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap](https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap)" rel="stylesheet">
             ```
-    * [ ]
+    * [✓]
 
 ### **Fase 1.5: Herramientas de Desarrollo y Seguridad**
 
@@ -172,7 +172,7 @@ Esta fase introduce herramientas críticas para el desarrollo y la gestión de c
 11. **Crear el Módulo `gBackup` (Backup de Archivos)**
     * Generar el módulo: `php artisan module:make gBackup`.
     * **Propósito:** Crear copias de seguridad de archivos específicos antes de ser modificados, facilitando la restauración rápida en caso de problemas.
-    * [ ]
+    * [✓]
 
 12. **Implementar la Lógica de Backup en `gBackup`**
     * **Directorio de Backup:** Definir una ruta configurable en `Modules/gBackup/Config/config.php` para almacenar los backups (ej. `storage_path('app/backups/files')`).
@@ -183,7 +183,7 @@ Esta fase introduce herramientas críticas para el desarrollo y la gestión de c
         * Retorne el `path` del backup.
     * **Integración (Opcional/Avanzado):** Considerar cómo integrar este comando en el flujo de trabajo. Podría ser un paso manual antes de una modificación importante, o se podría explorar "hooks" en el IDE o sistema de despliegue para automatizarlo.
     * **Nota:** Para una investigación detallada sobre las mejores prácticas de backup y rollback en desarrollo, consultar el documento "Laravel 12: Backup y Rollback" que se proporcionó.
-    * [ ]
+    * [✓]
 
 ### **Fase 2: Utilidades y Abstracciones Esenciales**
 

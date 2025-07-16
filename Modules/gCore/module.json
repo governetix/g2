@@ -1,0 +1,11 @@
+{
+    "name": "GCore",
+    "alias": "gcore",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GCore\\app\\Providers\\GCoreServiceProvider"
+    ],
+    "files": []
+}

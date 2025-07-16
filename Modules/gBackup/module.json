@@ -1,0 +1,11 @@
+{
+    "name": "GBackup",
+    "alias": "gbackup",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\GBackup\\app\\Providers\\GBackupServiceProvider"
+    ],
+    "files": []
+}
