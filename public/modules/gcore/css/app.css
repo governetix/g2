@@ -1,0 +1,165 @@
+/* Modules/gCore/Resources/assets/css/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    /* Colores Funcionales Generales */
+    --color-primario: 220 80% 50%;
+    --color-secundario: 260 60% 60%;
+    --color-acento: 30 90% 50%;
+    --color-fondo-principal: 0 0% 100%;
+    --color-fondo-secundario: 220 10% 95%;
+    --color-texto-principal: 220 20% 20%;
+    --color-texto-secundario: 220 10% 40%;
+    --color-borde-base: 220 10% 80%;
+    --color-sombra-base: 220 10% 70%;
+    --color-exito: 120 60% 40%;
+    --color-advertencia: 40 90% 50%;
+    --color-error: 0 70% 50%;
+    --color-informacion: 200 70% 50%;
+    --color-deshabilitado: 220 10% 70%;
+
+    /* Colores Interactivos (Botones, Enlaces, etc.) */
+    --interactivo-fondo-base: var(--color-primario);
+    --interactivo-texto-base: var(--color-fondo-principal);
+    --interactivo-borde-base: var(--color-primario);
+    --interactivo-fondo-hover: 220 80% 40%;
+    --interactivo-texto-hover: var(--color-fondo-principal);
+    --interactivo-borde-hover: 220 80% 40%;
+    --interactivo-fondo-focus: 220 80% 30%;
+    --interactivo-texto-focus: var(--color-fondo-principal);
+    --interactivo-borde-focus: 220 80% 30%;
+    --interactivo-fondo-activo: 220 80% 20%;
+    --interactivo-texto-activo: var(--color-fondo-principal);
+    --interactivo-borde-activo: 220 80% 20%;
+
+    /* Colores de Campos de Formulario */
+    --campo-fondo-predeterminado: var(--color-fondo-principal);
+    --campo-texto-predeterminado: var(--color-texto-principal);
+    --campo-placeholder: var(--color-texto-secundario);
+    --campo-borde-predeterminado: var(--color-borde-base);
+    --campo-borde-focus: var(--color-primario);
+    --campo-fondo-deshabilitado: var(--color-fondo-secundario);
+    --campo-icono: var(--color-texto-secundario);
+
+    /* Colores de Divisores */
+    --divisor-color: var(--color-borde-base);
+
+    /* Colores de Tablas */
+    --tabla-fondo-cabecera: var(--color-fondo-secundario);
+    --tabla-texto-cabecera: var(--color-texto-principal);
+    --tabla-borde-celda: var(--color-borde-base);
+    --tabla-fondo-fila-alterna: var(--color-fondo-principal);
+    --tabla-fondo-fila-hover: var(--color-fondo-secundario);
+
+    /* Colores de Bloques de Código */
+    --codigo-fondo: 220 10% 15%;
+    --codigo-texto: 220 20% 90%;
+
+    /* Colores de Citas (Blockquotes) */
+    --cita-borde-izquierdo: var(--color-borde-base);
+
+    /* Colores de Iconos e Ilustraciones */
+    --icono-base: var(--color-texto-secundario);
+    --ilustracion-base: var(--color-texto-secundario);
+
+    /* Colores de Gráficos (Paleta de Series) */
+    --grafico-serie-1: 220 80% 50%;
+    --grafico-serie-2: 260 60% 60%;
+    --grafico-serie-3: 30 90% 50%;
+    --grafico-serie-4: 120 60% 40%;
+    --grafico-serie-5: 0 70% 50%;
+    --grafico-serie-6: 200 70% 50%;
+    --grafico-serie-7: 180 70% 50%;
+    --grafico-serie-8: 60 90% 50%;
+    --grafico-serie-9: 300 70% 50%;
+    --grafico-serie-10: 280 60% 60%;
+    --grafico-serie-11: 10 90% 50%;
+    --grafico-serie-12: 150 60% 40%;
+    --grafico-texto-etiqueta: var(--color-texto-secundario);
+    --grafico-linea-eje: var(--color-borde-base);
+    --grafico-linea-cuadricula: var(--color-borde-base);
+    --grafico-tooltip-fondo: var(--color-fondo-secundario);
+    --grafico-tooltip-texto: var(--color-texto-principal);
+    --grafico-fondo-contenedor: var(--color-fondo-principal);
+
+    /* Colores de Mapas */
+    --mapa-color-minimo: 220 10% 90%;
+    --mapa-color-maximo: 220 80% 50%;
+    --mapa-borde-region: var(--color-borde-base);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-texto-principal));
+}
+
+#app {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar de 250px, contenido el resto */
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background-color: hsl(var(--color-fondo-secundario));
+    border-right: 1px solid hsl(var(--color-borde-base));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+}
+
+.sidebar-header h3 {
+    color: hsl(var(--color-primario));
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: hsl(var(--color-texto-principal));
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-primario));
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+}
+
+main {
+    padding: 20px;
+    background-color: hsl(var(--color-fondo-principal));
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    #app {
+        grid-template-columns: 1fr; /* Contenido ocupa todo el ancho */
+    }
+
+    .admin-sidebar {
+        display: none; /* Ocultar sidebar por defecto en pantallas pequeñas */
+        /* Para un menú hamburguesa, se podría añadir aquí position: fixed, z-index, etc. */
+    }
+}

@@ -4,36 +4,38 @@ namespace Modules\GCore\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use Modules\GCore\Services\SeoService;
 use Modules\GCore\Console\Commands\GenerateSitemapCommand;
+use Modules\GCore\Console\Commands\ScanRoutesCommand;
+use Modules\GCore\Console\Commands\ListRoutesControllersCommand;
 
 class GCoreServiceProvider extends ServiceProvider
 {
-
-    protected string $name = 'GCore';
-
-    protected string $nameLower = 'gcore';
-
     /**
      * Boot the application events.
      */
     public function boot(): void
     {
-        $this->registerCommands();
+        
         $this->registerCommandSchedules();
         $this->registerTranslations();
         $this->registerConfig();
-        $this->registerViews();
-        $this->loadMigrationsFrom(base_path('Modules/' . $this->name . '/database/migrations'));
-        $this->loadRoutesFrom(base_path('Modules/' . $this->name . '/Routes/web.php'));
+        $this->loadTypographySettings();
+        
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadRoutesFrom(__DIR__ . '/../../Routes/web.php');
 
         $this->app['router']->aliasMiddleware('setlocale', \Modules\GCore\Http\Middleware\SetLocaleMiddleware::class);
 
         $this->publishes([
-            __DIR__.'/../Resources/assets' => public_path('modules/gcore'),
+            __DIR__.'/../../Resources/assets' => public_path('modules/gcore'),
         ], 'gcore-assets');
 
-        Blade::component('x-gcore::seo-meta', \Modules\GCore\View\Components\SeoMeta::class);
+        $this->registerViews();
+
+        Blade::componentNamespace('Modules\\GCore\\View\\Components', 'gcore');
     }
 
     /**
@@ -42,8 +44,6 @@ class GCoreServiceProvider extends ServiceProvider
     public function register(): void
     {
         require_once __DIR__ . '/../Helpers/app.php';
-        // $this->app->register(EventServiceProvider::class);
-        // $this->app->register(RouteServiceProvider::class);
 
         $this->app->singleton(SeoService::class, function ($app) {
             return new SeoService();
@@ -51,13 +51,24 @@ class GCoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register commands in the format of Command::class
+     * Load typography settings from the database.
      */
-    protected function registerCommands(): void
+    protected function loadTypographySettings(): void
     {
-        $this->commands([
-            GenerateSitemapCommand::class,
-        ]);
+        try {
+            $typographySettings = DB::table('settings')
+                                    ->where('key', 'typography_settings')
+                                    ->first();
+
+            if ($typographySettings && $typographySettings->value) {
+                $settings = json_decode($typographySettings->value, true);
+                Config::set('gcore.typography', $settings);
+            }
+        } catch (\Exception $e) {
+            // Log the error, but don't stop the application
+            // This can happen if the settings table doesn't exist yet during migration
+            
+        }
     }
 
     /**
@@ -65,10 +76,15 @@ class GCoreServiceProvider extends ServiceProvider
      */
     protected function registerCommandSchedules(): void
     {
-        // $this->app->booted(function () {
-        //     $schedule = $this->app->make(Schedule::class);
-        //     $schedule->command('inspire')->hourly();
-        // });
+        $this->app->booted(function () {
+            // $this->commands([
+            //     GenerateSitemapCommand::class,
+            //     // ScanRoutesCommand::class, // Deshabilitado permanentemente debido a errores de carga
+            //     ListRoutesControllersCommand::class,
+            // ]);
+            // $schedule = $this->app->make(Schedule::class);
+            // $schedule->command('inspire')->hourly();
+        });
     }
 
     /**
@@ -76,14 +92,14 @@ class GCoreServiceProvider extends ServiceProvider
      */
     public function registerTranslations(): void
     {
-        $langPath = resource_path('lang/modules/'.$this->nameLower);
+        $langPath = resource_path('lang/modules/gcore');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, $this->nameLower);
+            $this->loadTranslationsFrom($langPath, 'gcore');
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(base_path('Modules/' . $this->name . '/Resources/lang'), $this->nameLower);
-            $this->loadJsonTranslationsFrom(base_path('Modules/' . $this->name . '/Resources/lang'));
+            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'gcore');
+            $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
         }
     }
 
@@ -92,7 +108,7 @@ class GCoreServiceProvider extends ServiceProvider
      */
     protected function registerConfig(): void
     {
-        $configPath = base_path('Modules/' . $this->name . '/Config');
+        $configPath = __DIR__ . '/../Config';
 
         if (is_dir($configPath)) {
             $iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($configPath));
@@ -101,7 +117,7 @@ class GCoreServiceProvider extends ServiceProvider
                 if ($file->isFile() && $file->getExtension() === 'php') {
                     $config = str_replace($configPath.DIRECTORY_SEPARATOR, '', $file->getPathname());
                     $config_key = str_replace([DIRECTORY_SEPARATOR, '.php'], ['.', ''], $config);
-                    $segments = explode('.', $this->nameLower.'.'.$config_key);
+                    $segments = explode('.', 'gcore.'.$config_key);
 
                     // Remove duplicated adjacent segments
                     $normalized = [];
@@ -111,24 +127,13 @@ class GCoreServiceProvider extends ServiceProvider
                         }
                     }
 
-                    $key = ($config === 'config.php') ? $this->nameLower : implode('.', $normalized);
+                    $key = ($config === 'config.php') ? 'gcore' : implode('.', $normalized);
 
                     $this->publishes([$file->getPathname() => config_path($config)], 'config');
-                    $this->merge_config_from($file->getPathname(), $key);
+                    $this->mergeConfigFrom($file->getPathname(), $key);
                 }
             }
         }
-    }
-
-    /**
-     * Merge config from the given path recursively.
-     */
-    protected function merge_config_from(string $path, string $key): void
-    {
-        $existing = config($key, []);
-        $module_config = require $path;
-
-        config([$key => array_replace_recursive($existing, $module_config)]);
     }
 
     /**
@@ -136,30 +141,22 @@ class GCoreServiceProvider extends ServiceProvider
      */
     public function registerViews(): void
     {
-        $viewPath = resource_path('views/modules/'.$this->nameLower);
-        $sourcePath = base_path('Modules/' . $this->name . '/Resources/views');
+        $viewPath = resource_path('views/modules/gcore');
+        $sourcePath = __DIR__ . '/../Resources/views';
 
-        $this->publishes([$sourcePath => $viewPath], ['views', $this->nameLower.'-module-views']);
+        $this->publishes([$sourcePath => $viewPath], ['views', 'gcore-module-views']);
 
-        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->nameLower);
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), 'gcore');
 
-        Blade::componentNamespace('Modules\GCore\View\Components', $this->nameLower);
-    }
-
-    /**
-     * Get the services provided by the provider.
-     */
-    public function provides(): array
-    {
-        return [];
+        // Blade::componentNamespace('Modules\\GCore\\View\\Components', 'gcore');
     }
 
     private function getPublishableViewPaths(): array
     {
         $paths = [];
         foreach (config('view.paths') as $path) {
-            if (is_dir($path.'/modules/'.$this->nameLower)) {
-                $paths[] = $path.'/modules/'.$this->nameLower;
+            if (is_dir($path.'/modules/gcore')) {
+                $paths[] = $path.'/modules/gcore';
             }
         }
 

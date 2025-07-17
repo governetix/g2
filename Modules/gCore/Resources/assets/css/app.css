@@ -1,5 +1,1663 @@
 /* Modules/gCore/Resources/assets/css/app.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+:root {
+    /* Colores Funcionales Generales */
+    --color-primario: 220 80% 50%;
+    --color-secundario: 260 60% 60%;
+    --color-acento: 30 90% 50%;
+    --color-fondo-principal: 0 0% 100%;
+    --color-fondo-secundario: 220 10% 95%;
+    --color-texto-principal: 220 20% 20%;
+    --color-texto-secundario: 220 10% 40%;
+    --color-borde-base: 220 10% 80%;
+    --color-sombra-base: 220 10% 70%;
+    --color-exito: 120 60% 40%;
+    --color-advertencia: 40 90% 50%;
+    --color-error: 0 70% 50%;
+    --color-informacion: 200 70% 50%;
+    --color-deshabilitado: 220 10% 70%;
+
+    /* Colores Interactivos (Botones, Enlaces, etc.) */
+    --interactivo-fondo-base: var(--color-primario);
+    --interactivo-texto-base: var(--color-fondo-principal);
+    --interactivo-borde-base: var(--color-primario);
+    --interactivo-fondo-hover: 220 80% 40%;
+    --interactivo-texto-hover: var(--color-fondo-principal);
+    --interactivo-borde-hover: 220 80% 40%;
+    --interactivo-fondo-focus: 220 80% 30%;
+    --interactivo-texto-focus: var(--color-fondo-principal);
+    --interactivo-borde-focus: 220 80% 30%;
+    --interactivo-fondo-activo: 220 80% 20%;
+    --interactivo-texto-activo: var(--color-fondo-principal);
+    --interactivo-borde-activo: 220 80% 20%;
+
+    /* Colores de Campos de Formulario */
+    --campo-fondo-predeterminado: var(--color-fondo-principal);
+    --campo-texto-predeterminado: var(--color-texto-principal);
+    --campo-placeholder: var(--color-texto-secundario);
+    --campo-borde-predeterminado: var(--color-borde-base);
+    --campo-borde-focus: var(--color-primario);
+    --campo-fondo-deshabilitado: var(--color-fondo-secundario);
+    --campo-icono: var(--color-texto-secundario);
+
+    /* Colores de Divisores */
+    --divisor-color: var(--color-borde-base);
+
+    /* Colores de Tablas */
+    --tabla-fondo-cabecera: var(--color-fondo-secundario);
+    --tabla-texto-cabecera: var(--color-texto-principal);
+    --tabla-borde-celda: var(--color-borde-base);
+    --tabla-fondo-fila-alterna: var(--color-fondo-principal);
+    --tabla-fondo-fila-hover: var(--color-fondo-secundario);
+
+    /* Colores de Bloques de Código */
+    --codigo-fondo: 220 10% 15%;
+    --codigo-texto: 220 20% 90%;
+
+    /* Colores de Citas (Blockquotes) */
+    --cita-borde-izquierdo: var(--color-borde-base);
+
+    /* Colores de Iconos e Ilustraciones */
+    --icono-base: var(--color-texto-secundario);
+    --ilustracion-base: var(--color-texto-secundario);
+
+    /* Colores de Gráficos (Paleta de Series) */
+    --grafico-serie-1: 220 80% 50%;
+    --grafico-serie-2: 260 60% 60%;
+    --grafico-serie-3: 30 90% 50%;
+    --grafico-serie-4: 120 60% 40%;
+    --grafico-serie-5: 0 70% 50%;
+    --grafico-serie-6: 200 70% 50%;
+    --grafico-serie-7: 180 70% 50%;
+    --grafico-serie-8: 60 90% 50%;
+    --grafico-serie-9: 300 70% 50%;
+    --grafico-serie-10: 280 60% 60%;
+    --grafico-serie-11: 10 90% 50%;
+    --grafico-serie-12: 150 60% 40%;
+    --grafico-texto-etiqueta: var(--color-texto-secundario);
+    --grafico-linea-eje: var(--color-borde-base);
+    --grafico-linea-cuadricula: var(--color-borde-base);
+    --grafico-tooltip-fondo: var(--color-fondo-secundario);
+    --grafico-tooltip-texto: var(--color-texto-principal);
+    --grafico-fondo-contenedor: var(--color-fondo-principal);
+
+    /* Colores de Mapas */
+    --mapa-color-minimo: 220 10% 90%;
+    --mapa-color-maximo: 220 80% 50%;
+    --mapa-borde-region: var(--color-borde-base);
+}
+
 body {
-    background-color: #f0f0f0;
-    color: #333;
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-texto-principal));
+}
+
+#app {
+    display: grid;
+    grid-template-columns: 250px 1fr; /* Sidebar de 250px, contenido el resto */
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background-color: hsl(var(--color-fondo-secundario));
+    border-right: 1px solid hsl(var(--color-borde-base));
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar-header {
+    margin-bottom: 30px;
+}
+
+.sidebar-header h3 {
+    color: hsl(var(--color-primario));
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 10px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: hsl(var(--color-texto-principal));
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover {
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-primario));
+}
+
+.sidebar-nav a i {
+    margin-right: 10px;
+}
+
+.sidebar-nav ul ul {
+    padding-left: 15px; /* Indent sub-menus */
+    margin-top: 5px;    /* Small space above sub-menu */
+    border-left: 2px solid hsl(var(--color-borde-base)); /* Visual indicator for sub-menu */
+}
+
+.sidebar-nav ul ul li {
+    margin-bottom: 5px; /* Smaller margin for sub-menu items */
+}
+
+.sidebar-nav ul ul li:last-child {
+    margin-bottom: 0; /* No margin for the last item in a sub-menu */
+}
+
+.sidebar-nav ul ul a {
+    padding: 8px 10px; /* Slightly smaller padding for sub-menu links */
+    font-size: 0.95em; /* Slightly smaller font size */
+}
+
+.gcore-card {
+    background-color: hsl(var(--color-fondo-principal));
+    border: 1px solid hsl(var(--color-borde-base));
+    border-radius: 8px;
+    box-shadow: 0 2px 4px hsla(var(--color-sombra-base), 0.1);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.gcore-card-header {
+    padding: 15px 20px;
+    border-bottom: 1px solid hsl(var(--color-borde-base));
+    background-color: hsl(var(--color-fondo-secundario));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.gcore-card-title {
+    margin: 0;
+    font-size: 1.2em;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-card-body {
+    padding: 20px;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid hsl(var(--color-borde-base));
+    background-color: hsl(var(--color-fondo-secundario));
+    color: hsl(var(--color-texto-secundario));
+    font-size: 0.9em;
+}
+
+.gcore-section {
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.gcore-section-title {
+    color: hsl(var(--color-texto-principal));
+    margin-bottom: 15px;
+    font-size: 1.8em;
+    border-bottom: 1px solid hsl(var(--color-borde-base));
+    padding-bottom: 10px;
+}
+
+.gcore-divider {
+    border: none;
+    background-color: hsl(var(--divisor-color));
+    margin: 20px 0;
+}
+
+.gcore-divider-horizontal {
+    height: 1px;
+    width: 100%;
+}
+
+.gcore-divider-vertical {
+    width: 1px;
+    height: 100%; /* Or a fixed height if used in a flex/grid item */
+    display: inline-block; /* To allow vertical alignment */
+    vertical-align: middle;
+}
+
+.gcore-info-box {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 1px solid;
+}
+
+.gcore-info-box-icon {
+    font-size: 1.8em;
+    margin-right: 15px;
+    line-height: 1;
+}
+
+.gcore-info-box-content {
+    flex-grow: 1;
+}
+
+.gcore-info-box-title {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.gcore-info-box-message {
+    margin-bottom: 0;
+    font-size: 0.95em;
+}
+
+/* Info Box Types */
+.gcore-info-box-info {
+    background-color: hsla(var(--color-informacion), 0.1);
+    border-color: hsl(var(--color-informacion));
+    color: hsl(var(--color-informacion));
+}
+.gcore-info-box-info .gcore-info-box-icon {
+    color: hsl(var(--color-informacion));
+}
+
+.gcore-info-box-success {
+    background-color: hsla(var(--color-exito), 0.1);
+    border-color: hsl(var(--color-exito));
+    color: hsl(var(--color-exito));
+}
+.gcore-info-box-success .gcore-info-box-icon {
+    color: hsl(var(--color-exito));
+}
+
+.gcore-info-box-warning {
+    background-color: hsla(var(--color-advertencia), 0.1);
+    border-color: hsl(var(--color-advertencia));
+    color: hsl(var(--color-advertencia));
+}
+.gcore-info-box-warning .gcore-info-box-icon {
+    color: hsl(var(--color-advertencia));
+}
+
+.gcore-info-box-error {
+    background-color: hsla(var(--color-error), 0.1);
+    border-color: hsl(var(--color-error));
+    color: hsl(var(--color-error));
+}
+.gcore-info-box-error .gcore-info-box-icon {
+    color: hsl(var(--color-error));
+}
+
+main {
+    padding: 20px;
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-texto-principal));
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    #app {
+        grid-template-columns: 1fr; /* Contenido ocupa todo el ancho */
+    }
+
+    .admin-sidebar {
+        display: none; /* Ocultar sidebar por defecto en pantallas pequeñas */
+        /* Para un menú hamburguesa, se podría añadir aquí position: fixed, z-index, etc. */
+    }
+}
+
+/* CSS for Button component */
+.gcore-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none; /* For link buttons */
+    white-space: nowrap;
+    vertical-align: middle;
+    user-select: none;
+    border: 1px solid transparent;
+}
+
+.gcore-btn i {
+    margin-right: 8px;
+}
+
+/* Variants */
+.gcore-btn-primary {
+    background-color: hsl(var(--interactivo-fondo-base));
+    color: hsl(var(--interactivo-texto-base));
+    border-color: hsl(var(--interactivo-borde-base));
+}
+.gcore-btn-primary:hover {
+    background-color: hsl(var(--interactivo-fondo-hover));
+    border-color: hsl(var(--interactivo-borde-hover));
+}
+.gcore-btn-primary:focus {
+    background-color: hsl(var(--interactivo-fondo-focus));
+    border-color: hsl(var(--interactivo-borde-focus));
+    box-shadow: 0 0 0 3px hsla(var(--interactivo-fondo-focus), 0.5);
+}
+.gcore-btn-primary:active {
+    background-color: hsl(var(--interactivo-fondo-activo));
+    border-color: hsl(var(--interactivo-borde-activo));
+}
+
+.gcore-btn-secondary {
+    background-color: hsl(var(--color-secundario));
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--color-secundario));
+}
+.gcore-btn-secondary:hover {
+    background-color: hsla(var(--color-secundario), 0.8);
+    border-color: hsla(var(--color-secundario), 0.8);
+}
+.gcore-btn-secondary:focus {
+    background-color: hsla(var(--color-secundario), 0.7);
+    border-color: hsla(var(--color-secundario), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-secundario), 0.5);
+}
+.gcore-btn-secondary:active {
+    background-color: hsla(var(--color-secundario), 0.6);
+    border-color: hsla(var(--color-secundario), 0.6);
+}
+
+.gcore-btn-success {
+    background-color: hsl(var(--color-exito));
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--color-exito));
+}
+.gcore-btn-success:hover {
+    background-color: hsla(var(--color-exito), 0.8);
+    border-color: hsla(var(--color-exito), 0.8);
+}
+.gcore-btn-success:focus {
+    background-color: hsla(var(--color-exito), 0.7);
+    border-color: hsla(var(--color-exito), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-exito), 0.5);
+}
+.gcore-btn-success:active {
+    background-color: hsla(var(--color-exito), 0.6);
+    border-color: hsla(var(--color-exito), 0.6);
+}
+
+.gcore-btn-danger {
+    background-color: hsl(var(--color-error));
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--color-error));
+}
+.gcore-btn-danger:hover {
+    background-color: hsla(var(--color-error), 0.8);
+    border-color: hsla(var(--color-error), 0.8);
+}
+.gcore-btn-danger:focus {
+    background-color: hsla(var(--color-error), 0.7);
+    border-color: hsla(var(--color-error), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-error), 0.5);
+}
+.gcore-btn-danger:active {
+    background-color: hsla(var(--color-error), 0.6);
+    border-color: hsla(var(--color-error), 0.6);
+}
+
+.gcore-btn-warning {
+    background-color: hsl(var(--color-advertencia));
+    color: hsl(var(--color-texto-principal)); /* Warning text usually dark */
+    border-color: hsl(var(--color-advertencia));
+}
+.gcore-btn-warning:hover {
+    background-color: hsla(var(--color-advertencia), 0.8);
+    border-color: hsla(var(--color-advertencia), 0.8);
+}
+.gcore-btn-warning:focus {
+    background-color: hsla(var(--color-advertencia), 0.7);
+    border-color: hsla(var(--color-advertencia), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-advertencia), 0.5);
+}
+.gcore-btn-warning:active {
+    background-color: hsla(var(--color-advertencia), 0.6);
+    border-color: hsla(var(--color-advertencia), 0.6);
+}
+
+.gcore-btn-info {
+    background-color: hsl(var(--color-informacion));
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--color-informacion));
+}
+.gcore-btn-info:hover {
+    background-color: hsla(var(--color-informacion), 0.8);
+    border-color: hsla(var(--color-informacion), 0.8);
+}
+.gcore-btn-info:focus {
+    background-color: hsla(var(--color-informacion), 0.7);
+    border-color: hsla(var(--color-informacion), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-informacion), 0.5);
+}
+.gcore-btn-info:active {
+    background-color: hsla(var(--color-informacion), 0.6);
+    border-color: hsla(var(--color-informacion), 0.6);
+}
+
+.gcore-btn-light {
+    background-color: hsl(var(--color-fondo-secundario));
+    color: hsl(var(--color-texto-principal));
+    border-color: hsl(var(--color-borde-base));
+}
+.gcore-btn-light:hover {
+    background-color: hsla(var(--color-fondo-secundario), 0.8);
+    border-color: hsla(var(--color-borde-base), 0.8);
+}
+.gcore-btn-light:focus {
+    background-color: hsla(var(--color-fondo-secundario), 0.7);
+    border-color: hsla(var(--color-borde-base), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--color-borde-base), 0.5);
+}
+.gcore-btn-light:active {
+    background-color: hsla(var(--color-fondo-secundario), 0.6);
+    border-color: hsla(var(--color-borde-base), 0.6);
+}
+
+.gcore-btn-dark {
+    background-color: hsl(var(--codigo-fondo)); /* Using code background for dark */
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--codigo-fondo));
+}
+.gcore-btn-dark:hover {
+    background-color: hsla(var(--codigo-fondo), 0.8);
+    border-color: hsla(var(--codigo-fondo), 0.8);
+}
+.gcore-btn-dark:focus {
+    background-color: hsla(var(--codigo-fondo), 0.7);
+    border-color: hsla(var(--codigo-fondo), 0.7);
+    box-shadow: 0 0 0 3px hsla(var(--codigo-fondo), 0.5);
+}
+.gcore-btn-dark:active {
+    background-color: hsla(var(--codigo-fondo), 0.6);
+    border-color: hsla(var(--codigo-fondo), 0.6);
+}
+
+.gcore-btn-link {
+    background: none;
+    border: none;
+    color: hsl(var(--color-primario));
+    padding: 0;
+    text-decoration: underline;
+}
+.gcore-btn-link:hover {
+    color: hsl(var(--interactivo-fondo-hover));
+    text-decoration: none;
+}
+.gcore-btn-link:focus {
+    color: hsl(var(--interactivo-fondo-focus));
+    box-shadow: none;
+}
+.gcore-btn-link:active {
+    color: hsl(var(--interactivo-fondo-activo));
+}
+
+/* Outline Buttons */
+.gcore-btn-outline {
+    background-color: transparent;
+}
+.gcore-btn-outline.gcore-btn-primary {
+    color: hsl(var(--color-primario));
+    border-color: hsl(var(--color-primario));
+}
+.gcore-btn-outline.gcore-btn-primary:hover {
+    background-color: hsl(var(--color-primario));
+    color: hsl(var(--color-fondo-principal));
+}
+/* Add outline styles for other variants similarly */
+
+/* Sizes */
+.gcore-btn-sm {
+    padding: 6px 12px;
+    font-size: 0.85em;
+}
+.gcore-btn-lg {
+    padding: 12px 24px;
+    font-size: 1.15em;
+}
+
+/* Disabled state */
+.gcore-btn:disabled,
+.gcore-btn.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* CSS for Dropdown component */
+.gcore-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.gcore-dropdown-toggle {
+    /* Inherit button styles or define new ones */
+    background-color: hsl(var(--interactivo-fondo-base));
+    color: hsl(var(--interactivo-texto-base));
+    border: 1px solid hsl(var(--interactivo-borde-base));
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.gcore-dropdown-toggle:hover {
+    background-color: hsl(var(--interactivo-fondo-hover));
+}
+
+.gcore-dropdown-menu {
+    position: absolute;
+    background-color: hsl(var(--color-fondo-principal));
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px hsla(var(--color-sombra-base), 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    border: 1px solid hsl(var(--color-borde-base));
+    padding: 8px 0;
+    display: none; /* Hidden by default */
+}
+
+.gcore-dropdown-menu-left {
+    left: 0;
+}
+
+.gcore-dropdown-menu-right {
+    right: 0;
+}
+
+.gcore-dropdown-menu a {
+    color: hsl(var(--color-texto-principal));
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.2s ease;
+}
+
+.gcore-dropdown-menu a:hover {
+    background-color: hsl(var(--color-fondo-secundario));
+}
+
+/* Show the dropdown menu on hover/focus (requires JS for full accessibility) */
+.gcore-dropdown:hover .gcore-dropdown-menu {
+    display: block;
+}
+
+/* CSS for Navbar component */
+.gcore-navbar {
+    background-color: hsl(var(--color-fondo-secundario));
+    color: hsl(var(--color-texto-principal));
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid hsl(var(--color-borde-base));
+}
+
+.gcore-navbar-brand {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: hsl(var(--color-primario));
+}
+
+.gcore-navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.gcore-navbar-nav a {
+    color: hsl(var(--color-texto-principal));
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.2s ease;
+}
+
+.gcore-navbar-nav a:hover {
+    background-color: hsla(var(--color-primario), 0.1);
+    color: hsl(var(--color-primario));
+}
+
+/* CSS for Pagination component */
+.gcore-pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.gcore-pagination-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-radius: 5px;
+    overflow: hidden;
+    border: 1px solid hsl(var(--color-borde-base));
+}
+
+.gcore-pagination-item {
+    margin: 0;
+}
+
+.gcore-pagination-link {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: hsl(var(--color-texto-principal));
+    background-color: hsl(var(--color-fondo-principal));
+    border-right: 1px solid hsl(var(--color-borde-base));
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.gcore-pagination-item:last-child .gcore-pagination-link {
+    border-right: none;
+}
+
+.gcore-pagination-link:hover {
+    background-color: hsl(var(--color-fondo-secundario));
+    color: hsl(var(--color-primario));
+}
+
+.gcore-pagination-item.active .gcore-pagination-link {
+    background-color: hsl(var(--color-primario));
+    color: hsl(var(--color-fondo-principal));
+    border-color: hsl(var(--color-primario));
+    cursor: default;
+}
+
+.gcore-pagination-item.disabled .gcore-pagination-link {
+    color: hsl(var(--color-texto-secundario));
+    background-color: hsl(var(--color-fondo-secundario));
+    cursor: not-allowed;
+}
+
+/* CSS for Tabs component */
+.gcore-tabs {
+    margin-bottom: 20px;
+    /* Dynamic styles applied via blade component */
+}
+
+.gcore-tabs-header {
+    display: flex;
+    border-bottom: 1px solid hsl(var(--color-borde-base));
+    margin-bottom: 15px;
+}
+
+.gcore-tab-button {
+    background-color: transparent;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: color 0.2s ease, border-bottom-color 0.2s ease, background-color 0.2s ease;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px; /* To make the active border overlap the header border */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gcore-tab-button i {
+    font-size: 1em;
+}
+
+.gcore-tabs-content {
+    /* Styles for the content area */
+}
+
+/* Individual tab panels should be hidden/shown with JS */
+.gcore-tab-panel {
+    display: none;
+}
+
+.gcore-tab-panel.active {
+    display: block;
+}
+
+/* CSS for Breadcrumbs component */
+.gcore-breadcrumbs {
+    margin-bottom: 20px;
+}
+
+.gcore-breadcrumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.gcore-breadcrumb-item {
+    display: flex;
+    align-items: center;
+    font-size: 0.9em;
+    color: hsl(var(--color-texto-secundario));
+}
+
+.gcore-breadcrumb-item + .gcore-breadcrumb-item::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: hsl(var(--color-texto-secundario));
+    content: "/"; /* Separator */
+}
+
+.gcore-breadcrumb-item a {
+    color: hsl(var(--color-primario));
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.gcore-breadcrumb-item a:hover {
+    color: hsl(var(--interactivo-fondo-hover));
+}
+
+.gcore-breadcrumb-item.active {
+    color: hsl(var(--color-texto-principal));
+    font-weight: 600;
+}
+
+/* CSS for Form Input component */
+.gcore-form-input {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid hsl(var(--campo-borde-predeterminado));
+    border-radius: 5px;
+    background-color: hsl(var(--campo-fondo-predeterminado));
+    color: hsl(var(--campo-texto-predeterminado));
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gcore-form-input::placeholder {
+    color: hsl(var(--campo-placeholder));
+}
+
+.gcore-form-input:focus {
+    outline: none;
+    border-color: hsl(var(--campo-borde-focus));
+    box-shadow: 0 0 0 3px hsla(var(--campo-borde-focus), 0.2);
+}
+
+.gcore-form-input:disabled,
+.gcore-form-input[readonly] {
+    background-color: hsl(var(--campo-fondo-deshabilitado));
+    cursor: not-allowed;
+}
+
+/* CSS for Alert component */
+.gcore-alert {
+    position: relative;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.gcore-alert-dismiss {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit; /* Inherit color from alert type */
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.gcore-alert-dismiss:hover {
+    opacity: 1;
+}
+
+/* Alert Types */
+.gcore-alert-info {
+    color: hsl(var(--color-informacion));
+    background-color: hsla(var(--color-informacion), 0.1);
+    border-color: hsl(var(--color-informacion));
+}
+
+.gcore-alert-success {
+    color: hsl(var(--color-exito));
+    background-color: hsla(var(--color-exito), 0.1);
+    border-color: hsl(var(--color-exito));
+}
+
+.gcore-alert-warning {
+    color: hsl(var(--color-advertencia));
+    background-color: hsla(var(--color-advertencia), 0.1);
+    border-color: hsl(var(--color-advertencia));
+}
+.gcore-alert-warning .gcore-alert-dismiss {
+    color: hsl(var(--color-advertencia));
+}
+
+.gcore-alert-danger {
+    color: hsl(var(--color-error));
+    background-color: hsla(var(--color-error), 0.1);
+    border-color: hsl(var(--color-error));
+}
+.gcore-alert-danger .gcore-alert-dismiss {
+    color: hsl(var(--color-error));
+}
+
+/* CSS for Notification (Toast) component */
+.gcore-notification {
+    position: fixed;
+    padding: 15px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px hsla(var(--color-sombra-base), 0.15);
+    z-index: 1050; /* Above modals */
+    max-width: 350px;
+    opacity: 0; /* Hidden by default, will be shown with JS */
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gcore-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.gcore-notification-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.gcore-notification-title {
+    margin: 0;
+    font-size: 1.1em;
+}
+
+.gcore-notification-dismiss {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    line-height: 1;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.gcore-notification-dismiss:hover {
+    opacity: 1;
+}
+
+.gcore-notification-body {
+    font-size: 0.95em;
+}
+
+/* Notification Positions */
+.gcore-notification-top-right {
+    top: 20px;
+    right: 20px;
+    transform: translateY(-100%);
+}
+.gcore-notification-top-left {
+    top: 20px;
+    left: 20px;
+    transform: translateY(-100%);
+}
+.gcore-notification-bottom-right {
+    bottom: 20px;
+    right: 20px;
+    transform: translateY(100%);
+}
+.gcore-notification-bottom-left {
+    bottom: 20px;
+    left: 20px;
+    transform: translateY(100%);
+}
+
+/* Notification Types (colors inherited from Alert types) */
+.gcore-notification-info {
+    color: hsl(var(--color-informacion));
+    background-color: hsla(var(--color-informacion), 0.1);
+    border-color: hsl(var(--color-informacion));
+}
+.gcore-notification-success {
+    color: hsl(var(--color-exito));
+    background-color: hsla(var(--color-exito), 0.1);
+    border-color: hsl(var(--color-exito));
+}
+.gcore-notification-warning {
+    color: hsl(var(--color-advertencia));
+    background-color: hsla(var(--color-advertencia), 0.1);
+    border-color: hsl(var(--color-advertencia));
+}
+.gcore-notification-danger {
+    color: hsl(var(--color-error));
+    background-color: hsla(var(--color-error), 0.1);
+    border-color: hsl(var(--color-error));
+}
+.gcore-notification-danger .gcore-notification-dismiss {
+    color: hsl(var(--color-error));
+}
+
+/* CSS for Modal component */
+.gcore-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1040; /* Below notification */
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+    outline: 0;
+    display: none; /* Hidden by default */
+}
+
+.gcore-modal.show {
+    display: block;
+}
+
+.gcore-modal-dialog {
+    position: relative;
+    width: auto;
+    margin: 10px;
+    pointer-events: none;
+}
+
+.gcore-modal.show .gcore-modal-dialog {
+    transform: none;
+    transition: transform 0.3s ease-out;
+}
+
+.gcore-modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: hsl(var(--color-fondo-principal));
+    background-clip: padding-box;
+    border: 1px solid hsla(var(--color-borde-base), 0.5);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.gcore-modal-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 15px;
+    border-bottom: 1px solid hsl(var(--color-borde-base));
+}
+
+.gcore-modal-title {
+    margin-bottom: 0;
+    line-height: 1.5;
+    font-size: 1.25em;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-modal-close {
+    padding: 1rem 1rem;
+    margin: -1rem -1rem -1rem auto;
+    background-color: transparent;
+    border: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: hsl(var(--color-texto-secundario));
+    text-shadow: 0 1px 0 hsl(var(--color-fondo-principal));
+    opacity: 0.5;
+    cursor: pointer;
+}
+
+.gcore-modal-close:hover {
+    opacity: 0.75;
+}
+
+.gcore-modal-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 15px;
+}
+
+.gcore-modal-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 15px;
+    border-top: 1px solid hsl(var(--color-borde-base));
+}
+
+/* Modal Sizes */
+.gcore-modal-sm {
+    max-width: 300px;
+}
+
+.gcore-modal-md {
+    max-width: 500px;
+}
+
+.gcore-modal-lg {
+    max-width: 800px;
+}
+
+.gcore-modal-xl {
+    max-width: 1140px;
+}
+
+.gcore-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1030; /* Below modal, above other content */
+    width: 100vw;
+    height: 100vh;
+    background-color: hsla(var(--color-texto-principal), 0.5);
+}
+
+/* CSS for Tooltip component */
+.gcore-tooltip-container {
+    position: relative;
+    display: inline-block;
+    /* Add styles for the element that triggers the tooltip */
+}
+
+.gcore-tooltip-text {
+    visibility: hidden;
+    background-color: hsl(var(--codigo-fondo)); /* Dark background for tooltip */
+    color: hsl(var(--codigo-texto)); /* Light text for tooltip */
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 8px;
+    position: absolute;
+    z-index: 1060; /* Above modals and notifications */
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 0.85em;
+    white-space: nowrap;
+}
+
+.gcore-tooltip-container:hover .gcore-tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Tooltip positions */
+.gcore-tooltip-top {
+    bottom: 125%; /* 100% for element height + 25% for spacing */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.gcore-tooltip-top::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: hsl(var(--codigo-fondo)) transparent transparent transparent;
+}
+
+.gcore-tooltip-bottom {
+    top: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.gcore-tooltip-bottom::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%; /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent hsl(var(--codigo-fondo)) transparent;
+}
+
+.gcore-tooltip-left {
+    top: 50%;
+    right: 125%;
+    transform: translateY(-50%);
+}
+.gcore-tooltip-left::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    left: 100%; /* At the right of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent hsl(var(--codigo-fondo));
+}
+
+.gcore-tooltip-right {
+    top: 50%;
+    left: 125%;
+    transform: translateY(-50%);
+}
+.gcore-tooltip-right::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* At the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent hsl(var(--codigo-fondo)) transparent transparent;
+}
+
+/* CSS for Spinner component */
+.gcore-spinner {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    vertical-align: -0.125em;
+    border-radius: 50%;
+    animation: gcore-spinner-border 0.75s linear infinite;
+}
+
+.gcore-spinner-border {
+    border: 0.25em solid currentColor;
+    border-right-color: transparent;
+}
+
+.gcore-spinner-grow {
+    background-color: currentColor;
+    border-radius: 50%;
+    opacity: 0;
+    animation: gcore-spinner-grow 0.75s linear infinite;
+}
+
+/* Sizes */
+.gcore-spinner-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em; /* For border spinner */
+}
+
+.gcore-spinner-lg {
+    width: 3rem;
+    height: 3rem;
+    border-width: 0.3em; /* For border spinner */
+}
+
+@keyframes gcore-spinner-border {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes gcore-spinner-grow {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* CSS for Empty State component */
+.gcore-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 20px;
+    border: 1px dashed hsl(var(--color-borde-base));
+    border-radius: 8px;
+    background-color: hsl(var(--color-fondo-secundario));
+    color: hsl(var(--color-texto-secundario));
+}
+
+.gcore-empty-state-icon {
+    font-size: 3em;
+    margin-bottom: 15px;
+    color: hsl(var(--color-texto-secundario));
+}
+
+.gcore-empty-state-title {
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-empty-state-message {
+    font-size: 1em;
+    margin-bottom: 0;
+}
+
+/* CSS for Progress Bar component */
+.gcore-progress {
+    height: 20px;
+    background-color: hsl(var(--color-fondo-secundario));
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.gcore-progress-bar {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(var(--color-fondo-principal));
+    font-size: 0.8em;
+    font-weight: bold;
+    transition: width 0.6s ease;
+}
+
+/* Progress Bar Variants */
+.gcore-progress-bar-primary {
+    background-color: hsl(var(--color-primario));
+}
+.gcore-progress-bar-success {
+    background-color: hsl(var(--color-exito));
+}
+.gcore-progress-bar-warning {
+    background-color: hsl(var(--color-advertencia));
+    color: hsl(var(--color-texto-principal)); /* Warning text usually dark */
+}
+.gcore-progress-bar-danger {
+    background-color: hsl(var(--color-error));
+}
+.gcore-progress-bar-info {
+    background-color: hsl(var(--color-informacion));
+}
+
+/* Striped */
+.gcore-progress-bar.striped {
+    background-image: linear-gradient(45deg, hsla(var(--color-fondo-principal), 0.15) 25%, transparent 25%, transparent 50%, hsla(var(--color-fondo-principal), 0.15) 50%, hsla(var(--color-fondo-principal), 0.15) 75%, transparent 75%, transparent);
+    background-size: 1rem 1rem;
+}
+
+/* Animated */
+.gcore-progress-bar.animated {
+    animation: gcore-progress-bar-stripes 1s linear infinite;
+}
+
+@keyframes gcore-progress-bar-stripes {
+    from { background-position: 1rem 0; }
+    to { background-position: 0 0; }
+}
+
+/* CSS for Table component */
+.gcore-table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.gcore-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: hsl(var(--color-texto-principal));
+    border-collapse: collapse;
+}
+
+.gcore-table th,
+.gcore-table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid hsl(var(--tabla-borde-celda));
+}
+
+.gcore-table thead th,
+.gcore-table thead td {
+    vertical-align: bottom;
+    border-bottom: 2px solid hsl(var(--tabla-borde-celda));
+    background-color: hsl(var(--tabla-fondo-cabecera));
+    color: hsl(var(--tabla-texto-cabecera));
+    text-align: left;
+}
+
+.gcore-table tbody + tbody {
+    border-top: 2px solid hsl(var(--tabla-borde-celda));
+}
+
+/* Striped table */
+.gcore-table.striped tbody tr:nth-of-type(odd) {
+    background-color: hsl(var(--tabla-fondo-fila-alterna));
+}
+
+/* Bordered table */
+.gcore-table.bordered th,
+.gcore-table.bordered td {
+    border: 1px solid hsl(var(--tabla-borde-celda));
+}
+
+.gcore-table.bordered thead th,
+.gcore-table.bordered thead td {
+    border-bottom-width: 2px;
+}
+
+/* Hoverable rows */
+.gcore-table.hoverable tbody tr:hover {
+    background-color: hsl(var(--tabla-fondo-fila-hover));
+}
+
+/* CSS for KPI component */
+.gcore-kpi {
+    background-color: hsl(var(--color-fondo-principal));
+    border: 1px solid hsl(var(--color-borde-base));
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px hsla(var(--color-sombra-base), 0.1);
+}
+
+.gcore-kpi-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.gcore-kpi-icon {
+    font-size: 1.5em;
+    margin-right: 10px;
+    color: hsl(var(--color-primario));
+}
+
+.gcore-kpi-label {
+    font-size: 1em;
+    color: hsl(var(--color-texto-secundario));
+}
+
+.gcore-kpi-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: hsl(var(--color-texto-principal));
+    margin-bottom: 5px;
+}
+
+.gcore-kpi-unit {
+    font-size: 0.6em;
+    vertical-align: super;
+    color: hsl(var(--color-texto-secundario));
+}
+
+.gcore-kpi-change {
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.gcore-kpi-change-positive {
+    color: hsl(var(--color-exito));
+}
+
+.gcore-kpi-change-negative {
+    color: hsl(var(--color-error));
+}
+
+.gcore-kpi-change-neutral {
+    color: hsl(var(--color-texto-secundario));
+}
+
+/* CSS for Chart Container component */
+.gcore-chart-container {
+    background-color: hsl(var(--grafico-fondo-contenedor));
+    border: 1px solid hsl(var(--color-borde-base));
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px hsla(var(--color-sombra-base), 0.1);
+}
+
+.gcore-chart-title {
+    font-size: 1.4em;
+    color: hsl(var(--color-texto-principal));
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.gcore-chart-description {
+    font-size: 0.9em;
+    color: hsl(var(--color-texto-secundario));
+    margin-bottom: 15px;
+}
+
+.gcore-chart-body {
+    /* Placeholder for chart library rendering */
+}
+
+/* CSS for Matrix component */
+.gcore-matrix-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 20px;
+}
+
+.gcore-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: hsl(var(--color-fondo-principal));
+    border: 1px solid hsl(var(--tabla-borde-celda));
+}
+
+.gcore-matrix-table th,
+.gcore-matrix-table td {
+    padding: 10px 15px;
+    border: 1px solid hsl(var(--tabla-borde-celda));
+    text-align: center;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-matrix-table thead th {
+    background-color: hsl(var(--tabla-fondo-cabecera));
+    color: hsl(var(--tabla-texto-cabecera));
+    font-weight: bold;
+}
+
+.gcore-matrix-table tbody th {
+    background-color: hsl(var(--tabla-fondo-secundario));
+    color: hsl(var(--tabla-texto-principal));
+    font-weight: bold;
+    text-align: left;
+}
+
+/* CSS for Hero Section component */
+.gcore-hero-section {
+    position: relative;
+    padding: 80px 20px;
+    text-align: center;
+    color: hsl(var(--color-fondo-principal)); /* Text color over hero */
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+}
+
+.gcore-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.gcore-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+}
+
+.gcore-hero-title {
+    font-size: 3em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: inherit;
+}
+
+.gcore-hero-subtitle {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: inherit;
+}
+
+/* CSS for CTA Section component */
+.gcore-cta-section {
+    padding: 50px 20px;
+    text-align: center;
+    margin-bottom: 40px;
+    border-radius: 8px;
+}
+
+.gcore-cta-title {
+    font-size: 2.2em;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.gcore-cta-subtitle {
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+/* CSS for Feature Grid component */
+.gcore-feature-grid {
+    margin-bottom: 40px;
+}
+
+.gcore-feature-item {
+    background-color: hsl(var(--color-fondo-principal));
+    border: 1px solid hsl(var(--color-borde-base));
+    border-radius: 8px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 2px 4px hsla(var(--color-sombra-base), 0.1);
+}
+
+.gcore-feature-icon {
+    font-size: 2.5em;
+    color: hsl(var(--color-primario));
+    margin-bottom: 15px;
+}
+
+.gcore-feature-title {
+    font-size: 1.3em;
+    color: hsl(var(--color-texto-principal));
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.gcore-feature-description {
+    font-size: 0.95em;
+    color: hsl(var(--color-texto-secundario));
+    margin-bottom: 0;
+}
+
+/* CSS for Testimonial Slider component */
+.gcore-testimonial-slider {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 40px;
+    padding: 20px;
+    background-color: hsl(var(--color-fondo-secundario));
+    border-radius: 8px;
+    box-shadow: 0 2px 4px hsla(var(--color-sombra-base), 0.1);
+}
+
+.gcore-testimonial-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    /* Will be controlled by JS for actual sliding */
+}
+
+.gcore-testimonial-slide {
+    flex: 0 0 100%; /* Each slide takes full width */
+    padding: 20px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.gcore-testimonial-quote {
+    font-size: 1.2em;
+    font-style: italic;
+    margin-bottom: 20px;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-testimonial-quote p {
+    margin: 0;
+}
+
+.gcore-testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.gcore-testimonial-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 2px solid hsl(var(--color-primario));
+}
+
+.gcore-author-info {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.gcore-author-name {
+    font-weight: bold;
+    color: hsl(var(--color-texto-principal));
+}
+
+.gcore-author-title {
+    font-size: 0.9em;
+    color: hsl(var(--color-texto-secundario));
+}
+
+main {
+    padding: 20px;
+    background-color: hsl(var(--color-fondo-principal));
+    color: hsl(var(--color-texto-principal));
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    #app {
+        grid-template-columns: 1fr; /* Contenido ocupa todo el ancho */
+    }
+
+    .admin-sidebar {
+        display: none; /* Ocultar sidebar por defecto en pantallas pequeñas */
+        /* Para un menú hamburguesa, se podría añadir aquí position: fixed, z-index, etc. */
+    }
 }

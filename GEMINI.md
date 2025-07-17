@@ -6,6 +6,8 @@ Este roadmap guiará la construcción de un módulo `Core` exhaustivo y auto-ges
 
 * A la hora de hacer troubleshooting, revisarás primero los archivos `Changes.md` y `Errors.md` para saber si este error ya se ha solucionado anteriormente y cómo.
 
+* Cuando generes un nuevo blade o componente, debes registrarlo en el archivo `Structure.md`. 
+
 * Siempre marca cada paso completado con un `[✓]` si fue exitoso o `[✖]` si el cambio falló.
 
 * Si el usuario solicita no borrar archivos, darás la opción de hacer un backup antes de hacerlo.
@@ -35,6 +37,8 @@ Para mantener la consistencia y facilitar el mantenimiento, se adoptarán las si
 * **Nombres** de **Funciones/Métodos:** `camelCase`.
 
 * **Nombres de Constantes:** `UPPER_SNAKE_CASE`.
+
+* **Nombres de Claves JSON para Temas:** `kebab-case` (ej. `"theme-name"`, `"primary-color"`).
 
 * **Assets (CSS/JS):** `kebab-case` para nombres de archivo (ej. `app.css`, `admin-dashboard.js`).
 
@@ -103,7 +107,7 @@ Esta fase establece la estructura básica y la capacidad de carga del módulo `C
         ```
     * [✓]
 
-7.  **Configurar Service Provider Básico (`gCoreServiceProvider.php`)**
+Sí, revisa **Configurar Service Provider Básico (`gCoreServiceProvider.php`)**
     * Este será el corazón del módulo. Asegurar que registra el archivo de configuración:
         ```php
         // En el método register()

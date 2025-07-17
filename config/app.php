@@ -162,22 +162,12 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         /*
-         * Package Service Providers...
-         */
-
-        /*
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        /*
-         * Module Service Providers...
-         */
-        // Modules\GCore\app\Providers\GCoreServiceProvider::class,
-        // Modules\GBackup\app\Providers\GBackupServiceProvider::class,
     ],
 
     /*

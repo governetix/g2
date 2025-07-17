@@ -9,6 +9,7 @@
         "php": "^8.2",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
+        "nwidart/laravel-modules": "*",
         "spatie/laravel-permission": "^6.20"
     },
     "require-dev": {
@@ -25,9 +26,9 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/",
-            "Modules\\GCore\\": "Modules/gCore/app/",
-            "Modules\\GBackup\\": "Modules/gBackup/app/",
-            "Modules\\GMonitorix\\": "Modules/gMonitorix/app/"
+            "Modules\\gCore\\": "Modules/gCore/app/",
+            "Modules\\gBackup\\": "Modules/gBackup/app/",
+            "Modules\\gMonitorix\\": "Modules/gMonitorix/app/"
         }
     },
     "autoload-dev": {
@@ -42,8 +43,11 @@
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
         ],
+        "post-install-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
         "post-root-package-install": [
-            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+            "@php -r 'file_exists('.env') || copy('.env.example', '.env');'"
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",

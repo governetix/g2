@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
+
+use App\Console\Commands\ListRoutesControllersCommand;
+
 use Illuminate\Support\ServiceProvider;
 use Modules\GCore\Providers\GCoreServiceProvider;
 use Modules\GBackup\Providers\GBackupServiceProvider;
@@ -24,6 +28,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->commands([
+            ListRoutesControllersCommand::class,
+        ]);
+
+        View::addNamespace('gcore', base_path('Modules/gCore/Resources/views'));
     }
 }

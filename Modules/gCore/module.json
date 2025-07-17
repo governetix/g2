@@ -7,5 +7,6 @@
     "providers": [
         "Modules\\GCore\\app\\Providers\\GCoreServiceProvider"
     ],
-    "files": []
+    "files": [],
+    "active": false
 }

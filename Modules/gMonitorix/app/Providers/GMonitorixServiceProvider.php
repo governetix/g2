@@ -24,6 +24,6 @@ class GMonitorixServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../Resources/views', 'gmonitorix');
         $this->loadTranslationsFrom(__DIR__ . '/../../Resources/lang', 'gmonitorix');
         $this->mergeConfigFrom(__DIR__ . '/../../Config/config.php', 'gmonitorix');
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+        $this->loadMigrationsFrom(base_path('Modules/gMonitorix/database/migrations'));
     }
 }
