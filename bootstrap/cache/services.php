@@ -20,22 +20,23 @@
     16 => 'Illuminate\\Redis\\RedisServiceProvider',
     17 => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
     18 => 'Illuminate\\Session\\SessionServiceProvider',
-    19 => 'Illuminate\\Translation\\TranslationServiceProvider',
-    20 => 'Illuminate\\Validation\\ValidationServiceProvider',
-    21 => 'Illuminate\\View\\ViewServiceProvider',
-    22 => 'Laravel\\Pail\\PailServiceProvider',
-    23 => 'Laravel\\Sail\\SailServiceProvider',
-    24 => 'Laravel\\Tinker\\TinkerServiceProvider',
-    25 => 'Carbon\\Laravel\\ServiceProvider',
-    26 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
-    27 => 'Termwind\\Laravel\\TermwindServiceProvider',
-    28 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
-    29 => 'Spatie\\Permission\\PermissionServiceProvider',
+    19 => 'Illuminate\\Validation\\ValidationServiceProvider',
+    20 => 'Illuminate\\View\\ViewServiceProvider',
+    21 => 'Laravel\\Pail\\PailServiceProvider',
+    22 => 'Laravel\\Sail\\SailServiceProvider',
+    23 => 'Laravel\\Tinker\\TinkerServiceProvider',
+    24 => 'Carbon\\Laravel\\ServiceProvider',
+    25 => 'NunoMaduro\\Collision\\Adapters\\Laravel\\CollisionServiceProvider',
+    26 => 'Termwind\\Laravel\\TermwindServiceProvider',
+    27 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
+    28 => 'Spatie\\Permission\\PermissionServiceProvider',
+    29 => 'App\\Providers\\TranslationOverrideServiceProvider',
     30 => 'App\\Providers\\AppServiceProvider',
     31 => 'App\\Providers\\AuthServiceProvider',
     32 => 'App\\Providers\\EventServiceProvider',
     33 => 'App\\Providers\\RouteServiceProvider',
     34 => 'App\\Providers\\AppServiceProvider',
+    35 => 'App\\Providers\\TranslationOverrideServiceProvider',
   ),
   'eager' => 
   array (
@@ -55,11 +56,13 @@
     13 => 'Termwind\\Laravel\\TermwindServiceProvider',
     14 => 'Nwidart\\Modules\\LaravelModulesServiceProvider',
     15 => 'Spatie\\Permission\\PermissionServiceProvider',
-    16 => 'App\\Providers\\AppServiceProvider',
-    17 => 'App\\Providers\\AuthServiceProvider',
-    18 => 'App\\Providers\\EventServiceProvider',
-    19 => 'App\\Providers\\RouteServiceProvider',
-    20 => 'App\\Providers\\AppServiceProvider',
+    16 => 'App\\Providers\\TranslationOverrideServiceProvider',
+    17 => 'App\\Providers\\AppServiceProvider',
+    18 => 'App\\Providers\\AuthServiceProvider',
+    19 => 'App\\Providers\\EventServiceProvider',
+    20 => 'App\\Providers\\RouteServiceProvider',
+    21 => 'App\\Providers\\AppServiceProvider',
+    22 => 'App\\Providers\\TranslationOverrideServiceProvider',
   ),
   'deferred' => 
   array (
@@ -207,8 +210,6 @@
     'redis.connection' => 'Illuminate\\Redis\\RedisServiceProvider',
     'auth.password' => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
     'auth.password.broker' => 'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider',
-    'translator' => 'Illuminate\\Translation\\TranslationServiceProvider',
-    'translation.loader' => 'Illuminate\\Translation\\TranslationServiceProvider',
     'validator' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'validation.presence' => 'Illuminate\\Validation\\ValidationServiceProvider',
     'Illuminate\\Contracts\\Validation\\UncompromisedVerifier' => 'Illuminate\\Validation\\ValidationServiceProvider',
@@ -246,9 +247,6 @@
     array (
     ),
     'Illuminate\\Auth\\Passwords\\PasswordResetServiceProvider' => 
-    array (
-    ),
-    'Illuminate\\Translation\\TranslationServiceProvider' => 
     array (
     ),
     'Illuminate\\Validation\\ValidationServiceProvider' => 

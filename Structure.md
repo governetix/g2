@@ -28,12 +28,12 @@ Esta sección debe ser actualizada cada vez que se agregue un nuevo componente a
     │   │   │
 [B] │   │   ├── `style`                 
 [B] │   │   │    ├── `theme`            // Gestión de temas CSS
-[I] │   │   │    ├── `format`           // Gestión de fuentes, encabezados y 
-[I] │   │   │    ├── `visual`           // Gestión de formatos visuales
-[I] │   │   │    ├── `form`             // Gestión de formularios
-[I] │   │   │    ├── `table`            // Gestión de tablas
-[I] │   │   │    ├── `charts`           // Gestión de gráficas
-[I] │   │   │    └── `maps`             // Gestión de mapas
+[B] │   │   │    ├── `format`           // Gestión de fuentes, encabezados y 
+[B] │   │   │    ├── `visual`           // Gestión de formatos visuales
+[B] │   │   │    ├── `form`             // Gestión de formularios
+[B] │   │   │    ├── `table`            // Gestión de tablas
+[B] │   │   │    ├── `charts`           // Gestión de gráficas
+[B] │   │   │    └── `maps`             // Gestión de mapas
 [B] │   │   └── `feature-flags`     // Gestión de feature flags
     │   │
 [I] │   ├── `backup`

@@ -10,6 +10,9 @@ use Illuminate\Support\ServiceProvider;
 use Modules\GCore\Providers\GCoreServiceProvider;
 use Modules\GBackup\Providers\GBackupServiceProvider;
 use Modules\GMonitorix\Providers\GMonitorixServiceProvider;
+use Modules\GCore\Services\DatabaseTranslationLoader;
+use Modules\GCore\Repositories\TranslationRepository;
+use Illuminate\Translation\Translator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +24,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(GCoreServiceProvider::class);
         $this->app->register(GBackupServiceProvider::class);
         $this->app->register(GMonitorixServiceProvider::class);
+
+        $this->app->singleton('translator', function ($app) {
+            $loader = new DatabaseTranslationLoader($app['files'], $app['path.lang'], $app->make(TranslationRepository::class));
+            $locale = $app['config']['app.locale'];
+            $trans = new Translator($loader, $locale);
+            $trans->setFallback($app['config']['app.fallback_locale']);
+            return $trans;
+        });
     }
 
     /**
@@ -28,10 +39,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->commands([
-            ListRoutesControllersCommand::class,
-        ]);
-
-        View::addNamespace('gcore', base_path('Modules/gCore/Resources/views'));
+        //
     }
 }

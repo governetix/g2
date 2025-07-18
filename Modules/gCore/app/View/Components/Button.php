@@ -55,6 +55,17 @@ class Button extends Component
      */
     public function render()
     {
-        return view('gcore::components.button');
+        // Pasa explícitamente todas las propiedades públicas a la vista
+        // Explicitly pass all public properties to the view
+        return view('gcore::components.button', [
+            'type' => $this->type,
+            'variant' => $this->variant,
+            'size' => $this->size,
+            'outline' => $this->outline,
+            'disabled' => $this->disabled,
+            'icon' => $this->icon,
+            'class' => $this->class,
+            'style' => $this->style,
+        ]);
     }
 }

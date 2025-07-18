@@ -18,9 +18,18 @@ class GCoreServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Diagnóstico temporal: Forzar recompilación de la vista de traducciones
+        if (app()->environment('local')) {
+            \Illuminate\Support\Facades\Artisan::call('view:clear');
+            // Intentar cargar la vista para forzar su compilación
+            try {
+                app('view')->getEngineResolver()->resolve('blade')->getCompiler()->compile(app('view')->getFinder()->find('gcore::admin.translations.index'));
+            } catch (\Exception $e) {
+                // Ignorar errores de compilación aquí, solo queremos forzarla
+            }
+        }
         
         $this->registerCommandSchedules();
-        $this->registerTranslations();
         $this->registerConfig();
         $this->loadTypographySettings();
         
@@ -47,6 +56,11 @@ class GCoreServiceProvider extends ServiceProvider
 
         $this->app->singleton(SeoService::class, function ($app) {
             return new SeoService();
+        });
+
+        $this->app->singleton('translator.loader', function ($app) {
+            $path = $app['path.lang'];
+            return new \Modules\GCore\Services\DatabaseTranslationLoader($app['files'], $path, $app->make(\Modules\GCore\Repositories\TranslationRepository::class));
         });
     }
 
@@ -98,8 +112,8 @@ class GCoreServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, 'gcore');
             $this->loadJsonTranslationsFrom($langPath);
         } else {
-            $this->loadTranslationsFrom(__DIR__ . '/../Resources/lang', 'gcore');
-            $this->loadJsonTranslationsFrom(__DIR__ . '/../Resources/lang');
+            $this->loadTranslationsFrom(__DIR__ . '/../../Resources/lang', 'gcore');
+            $this->loadJsonTranslationsFrom(__DIR__ . '/../../Resources/lang');
         }
     }
 
@@ -142,13 +156,13 @@ class GCoreServiceProvider extends ServiceProvider
     public function registerViews(): void
     {
         $viewPath = resource_path('views/modules/gcore');
-        $sourcePath = __DIR__ . '/../Resources/views';
+        $sourcePath = __DIR__ . '/../../Resources/views';
 
         $this->publishes([$sourcePath => $viewPath], ['views', 'gcore-module-views']);
 
         $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), 'gcore');
 
-        // Blade::componentNamespace('Modules\\GCore\\View\\Components', 'gcore');
+        Blade::componentNamespace('Modules\\GCore\\View\\Components', 'gcore');
     }
 
     private function getPublishableViewPaths(): array

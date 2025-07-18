@@ -1,0 +1,12 @@
+feat: Implementación inicial de la Fase 4 y mejoras de UI/UX
+
+Se ha iniciado la implementación de la Fase 4 del roadmap, enfocándose en la gestión del módulo base desde la interfaz. Esto incluye:
+
+- **Configuración de UI/UX:** Integración de un sistema de diseño completo con variables CSS y estilos para diversos componentes en `gCore/Resources/assets/css/app.css`.
+- **Gestión de Temas y Estilos:** Implementación de lógica para la carga dinámica de temas CSS y estilos visuales, incluyendo una nueva función `get_active_css_theme_path()` y ajustes en `gCoreServiceProvider`.
+- **Rutas y Vistas de Administración:** Adición de rutas y vistas para la gestión de configuraciones, feature flags y temas CSS en el módulo `gCore`.
+- **Refactorización de `gCoreServiceProvider`:** Mejoras en la carga de configuraciones de tipografía y registro de componentes Blade.
+- **Actualización de `GEMINI.md`:** Inclusión de nuevas convenciones de nomenclatura y el paso para registrar blades/componentes en `Structure.md`.
+- **Limpieza y Configuración de Módulos:** Eliminación de archivos obsoletos (`config/modules.php`, `modules_statuses.json`) y ajustes en la configuración de `nwidart/laravel-modules`.
+
+Este commit sienta las bases para la gestión interactiva del módulo `gCore` y mejora significativamente la apariencia y estructura de la interfaz de usuario.

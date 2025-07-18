@@ -11,6 +11,7 @@ echo.
 
 echo [PASO 1] Limpiando caches de la aplicacion, configuracion, rutas y vistas...
 php artisan optimize:clear
+php artisan cache:clear
 echo.
 
 echo [PASO 2] Limpiando caches de paquetes compilados...

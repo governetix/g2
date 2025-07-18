@@ -79,7 +79,9 @@ class GCoreSettingsController extends Controller
      */
     public function form()
     {
-        return view('gcore::admin.style.form');
+        // Asegurarse de que la variable $errors esté siempre definida para el showroom
+        $errors = new \Illuminate\Support\ViewErrorBag();
+        return view('gcore::admin.style.form', compact('errors'));
     }
 
     /**
